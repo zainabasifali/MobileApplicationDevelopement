@@ -1,0 +1,43 @@
+void main() {
+  var array = [
+    'this is really really cool experiment really',
+    'cute little experiment',
+    'will it work maybe it will work do you think it will it will'
+  ];
+
+  List<Map<String, dynamic>> wordFrequency = [];
+
+  for (int i = 0; i < array.length; i++) {
+//it actually returns an array of word split with space
+    var words = array[i].split(' ');
+
+//to store the word and its frequency in a object
+    var wordCount = <String, int>{};
+
+    for (int j = 0; j < words.length; j++) {
+      var word = words[j];
+      if (wordCount.containsKey(word)) {
+        wordCount[word] = wordCount[word]! + 1;
+      } else {
+        wordCount[word] = 1;
+      }
+    }
+
+//stores most repeated word in an array of wordeFrequency
+    var mostRepeatedWords =
+        []; //as there can be more than one word with same frequency
+    var maxCount = 0;
+
+    wordCount.forEach((word, count) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostRepeatedWords = [word];
+      } else if (count == maxCount) {
+        mostRepeatedWords.add(word);
+      }
+    });
+
+    wordFrequency.add({'name': mostRepeatedWords, 'count': maxCount});
+  }
+  print(wordFrequency);
+}
